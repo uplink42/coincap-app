@@ -23,9 +23,9 @@ export class CoinAssetsComponent {
   @Input({ required: true }) pageAssets: Asset[] = [];
   @Input({ required: true }) totalAssets: Asset[] = [];
   @Input({ required: true }) actionName = '';
+  @Input({ required: true }) actionCallback: (asset: Asset) => void = () => {};
   @Input() itemsPerPage = 12;
   @Input() emptyMessage = 'No items';
-  @Input({ required: true }) actionCallback: (asset: Asset) => void = () => {};
 
   @Output() changePage = new EventEmitter<number>();
 }

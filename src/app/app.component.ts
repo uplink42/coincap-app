@@ -41,6 +41,14 @@ export class AppComponent implements OnInit {
       .subscribe((assets) => this.appState.setAssets(assets.data));
   }
 
+  setActiveProfile(id: number) {
+    this.appState.setActiveProfile(id);
+  }
+
+  deleteProfile(id: number) {
+    this.appState.deleteProfile(id);
+  }
+
   addProfile(name: string) {
     const id = this.appState.createProfile(name);
     this.appState.setActiveProfile(id);

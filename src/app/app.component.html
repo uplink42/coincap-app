@@ -11,8 +11,8 @@
 
     <div class="profiles-wrapper">
       <app-coin-profiles [profiles]="data.profiles || []" [activeProfile]="data.activeProfile"
-        (createProfile)="addProfile($event)" (deleteProfile)="appState.deleteProfile($event)"
-        (setActiveProfile)="appState.setActiveProfile($event)">
+        (createProfile)="addProfile($event)" (deleteProfile)="deleteProfile($event)"
+        (setActiveProfile)="setActiveProfile($event)">
       </app-coin-profiles>
     </div>
   </div>
