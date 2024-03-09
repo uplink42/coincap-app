@@ -1,3 +1,4 @@
+@if (coinPrices$ | async; as coinPrices) {
 <div class="card-list mat-elevation-z8">
     @for (asset of pageAssets; track $index) {
     <mat-card class="card">
@@ -8,7 +9,7 @@
             </div>
             <mat-card-title>{{asset.name}}</mat-card-title>
             <mat-card-subtitle>{{asset.symbol}}</mat-card-subtitle>
-            <mat-card-subtitle> {{asset.priceUsd | currency}}</mat-card-subtitle>
+            <mat-card-subtitle> {{(coinPrices[asset.id] || asset.priceUsd) | currency}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions align="end">
             <button mat-button (click)="actionCallback(asset)">{{actionName}}</button>
@@ -23,3 +24,4 @@
     <mat-paginator #paginator [pageSizeOptions]="[itemsPerPage]" aria-label="Select page of assets"
         [length]="totalAssets.length" (page)="changePage.emit($event.pageIndex)"></mat-paginator>
 </div>
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
-import { Asset, Profile } from './models';
+import { Asset, CoinPrices, Profile } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +14,9 @@ export class AppStateService {
 
   private readonly activeProfile = new BehaviorSubject<number | null>(null);
   readonly activeProfile$ = this.activeProfile.asObservable();
+
+  private readonly coinPrices = new BehaviorSubject<CoinPrices>({});
+  readonly coinPrices$ = this.coinPrices.asObservable();
 
   readonly availableAssetsInActiveProfile$ = combineLatest([
     this.activeProfile$,
@@ -60,6 +63,10 @@ export class AppStateService {
       return activeProfile?.assets || [];
     })
   );
+
+  setCoinPrices(prices: CoinPrices) {
+    this.coinPrices.next({ ...this.coinPrices.value, ...prices });
+  }
 
   setAssets(assets: Asset[]) {
     this.assets.next(assets);

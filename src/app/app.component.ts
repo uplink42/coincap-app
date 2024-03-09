@@ -39,6 +39,8 @@ export class AppComponent implements OnInit {
     this.coinCap
       .getAssets()
       .subscribe((assets) => this.appState.setAssets(assets.data));
+
+    this.coinCap.getPrices();
   }
 
   setActiveProfile(id: number) {

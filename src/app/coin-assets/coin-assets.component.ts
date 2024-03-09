@@ -4,17 +4,25 @@ import {
   EventEmitter,
   Input,
   Output,
+  inject,
 } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { Asset } from '../models';
 import { MatButton } from '@angular/material/button';
+import { AppStateService } from '../app-state.service';
 
 @Component({
   selector: 'app-coin-assets',
   standalone: true,
-  imports: [CurrencyPipe, MatCardModule, MatPaginatorModule, MatButton],
+  imports: [
+    CurrencyPipe,
+    MatCardModule,
+    MatPaginatorModule,
+    MatButton,
+    AsyncPipe,
+  ],
   templateUrl: './coin-assets.component.html',
   styleUrl: './coin-assets.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -28,4 +36,8 @@ export class CoinAssetsComponent {
   @Input() emptyMessage = 'No items';
 
   @Output() changePage = new EventEmitter<number>();
+
+  appState = inject(AppStateService);
+
+  coinPrices$ = this.appState.coinPrices$;
 }
