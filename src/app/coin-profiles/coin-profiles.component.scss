@@ -1,0 +1,37 @@
+.profile-list {
+    margin-top: 50px;
+}
+
+.new-profile {
+    margin-top: 30px;
+}
+
+.item {
+    display: flex;
+
+    .name {
+        flex: 1;
+
+        &.active {
+            font-weight: bold;
+        }
+    }
+
+    .action {
+        flex-basis: 30px;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}
+
+:host ::ng-deep {
+    .mdc-list-item__end {
+        display: none;
+    }
+}

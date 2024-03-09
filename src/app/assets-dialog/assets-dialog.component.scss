@@ -1,0 +1,25 @@
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+mat-card {
+    margin: 15px 15px;
+    flex-basis: 300px;
+}
+
+mat-dialog-actions {
+    margin-top: 10px;
+}
+
+:host ::ng-deep {
+    .mat-mdc-dialog-content {
+        max-height: 74vh;
+    }
+}
+
+.paginator-wrapper {
+    text-align: right;
+    margin-top: 15px;
+}

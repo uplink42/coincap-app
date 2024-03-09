@@ -1,0 +1,9 @@
+.dialog-wrapper {
+    margin: 20px;
+}
+
+:host ::ng-deep {
+    mat-dialog-actions {
+        justify-content: flex-end;
+    }
+}

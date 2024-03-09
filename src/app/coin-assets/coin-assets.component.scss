@@ -1,0 +1,15 @@
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+mat-card {
+    margin: 15px 15px;
+    flex-basis: 300px;
+}
+
+.paginator-wrapper {
+    text-align: right;
+    margin-top: 15px;
+}

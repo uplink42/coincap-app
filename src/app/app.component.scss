@@ -1,0 +1,20 @@
+.app-container {
+    margin: 50px;
+}
+
+.grid-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .coin-list-wrapper {
+        margin-top: 50px;
+        flex: 1;
+    }
+
+    .profiles-wrapper {
+        margin-left: 30px;
+        margin-top: 50px;
+        flex-basis: 300px;
+        text-align: center;
+    }
+}

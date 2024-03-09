@@ -1,0 +1,4 @@
+<app-coin-assets [pageAssets]="(availableAssetsForCurrentPage$ | async) || []" [itemsPerPage]="itemsPerPage"
+    [totalAssets]="(appState.assetsInActiveProfile$| async) || []" actionName="Remove"
+    [actionCallback]="appState.removeAssetFromCurrentProfile" emptyMessage="No assets in current profile."
+    (changePage)="pageIndex$.next($event)"></app-coin-assets>

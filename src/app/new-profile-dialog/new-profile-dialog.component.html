@@ -1,0 +1,15 @@
+<div class="dialog-wrapper">
+    <h2 mat-dialog-title>Create profile </h2>
+
+    <mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Profile name</mat-label>
+            <input matInput [(ngModel)]="profile" cdkFocusInitial>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button mat-button (click)="dialogRef.close()">Cancel</button>
+        <button mat-raised-button (click)="onSave()" [disabled]="!profile" type="submit" color="primary">Save</button>
+    </mat-dialog-actions>
+</div>
