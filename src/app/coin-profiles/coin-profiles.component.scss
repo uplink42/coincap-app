@@ -29,9 +29,3 @@
         }
     }
 }
-
-:host ::ng-deep {
-    .mdc-list-item__end {
-        display: none;
-    }
-}

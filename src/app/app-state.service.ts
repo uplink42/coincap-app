@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, map, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { Asset, Profile } from './models';
 
 @Injectable({
@@ -67,7 +67,6 @@ export class AppStateService {
 
   createProfile(name: string) {
     const id = +new Date();
-
     this.profiles.next([...this.profiles.value, { id, name, assets: [] }]);
 
     return id;

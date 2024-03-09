@@ -10,7 +10,7 @@
   @for (profile of profiles; track $index) {
   <div class="item">
     <button mat-button class="name" [class.active]="profile.id === activeProfile"
-      (click)="setActiveProfile.emit(profile.id)">
+      (click)="setActiveProfile.emit(profile.id); profileName = profile.name">
       {{profile.name}}</button>
     <div class="action">
       <mat-icon aria-hidden="false" aria-label="Example icon" fontIcon="delete" color="warn"

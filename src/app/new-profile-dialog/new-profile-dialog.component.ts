@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
   MatDialogRef,
   MatDialogTitle,
@@ -26,6 +26,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   templateUrl: './new-profile-dialog.component.html',
   styleUrl: './new-profile-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NewProfileDialogComponent {
   constructor(public dialogRef: MatDialogRef<NewProfileDialogComponent>) {}

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import {
   MatDialogActions,
   MatDialogClose,
@@ -28,14 +28,13 @@ const itemsPerPage = 12;
   ],
   templateUrl: './assets-dialog.component.html',
   styleUrl: './assets-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AssetsDialogComponent {
   appState = inject(AppStateService);
 
   pageIndex$ = new BehaviorSubject<number>(0);
-
   displayedColumns: string[] = ['table'];
-
   itemsPerPage = itemsPerPage;
 
   availableAssetsForCurrentPage$ = combineLatest([

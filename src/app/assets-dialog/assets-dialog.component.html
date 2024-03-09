@@ -2,36 +2,6 @@
     <h2 mat-dialog-title>Create profile </h2>
 
     <mat-dialog-content>
-        <!-- @if (availableAssetsForCurrentPage$ | async; as assets) {
-        <div class="card-list mat-elevation-z8">
-            @for (asset of assets; track $index) {
-            <mat-card class="card">
-                <mat-card-header>
-                    <div mat-card-avatar class="header-image">
-                        <img src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/{{asset.symbol.toLowerCase()}}.svg"
-                            alt="icon" />
-                    </div>
-                    <mat-card-title>{{asset.name}}</mat-card-title>
-                    <mat-card-subtitle>{{asset.symbol}}</mat-card-subtitle>
-                    <mat-card-subtitle> {{asset.priceUsd | currency}}</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-actions align="end">
-                    <button mat-button (click)="appState.addAssetToActiveProfile(asset)">Add</button>
-                </mat-card-actions>
-            </mat-card>
-            } @empty {
-            <span>No assets left to add to this profile.</span>
-            }
-        </div>
-        }
-
-        @if (appState.availableAssetsInActiveProfile$| async; as assets) {
-        <div class="paginator-wrapper">
-            <mat-paginator #paginator [pageSizeOptions]="[itemsPerPage]" aria-label="Select page of assets"
-                [length]="assets.length" (page)="pageIndex$.next($event.pageIndex)"></mat-paginator>
-        </div>
-        } -->
-
         <app-coin-assets [pageAssets]="(availableAssetsForCurrentPage$ | async) || []" [itemsPerPage]="itemsPerPage"
             [totalAssets]="(appState.availableAssetsInActiveProfile$| async) || []" actionName="Add"
             [actionCallback]="appState.addAssetToActiveProfile" emptyMessage="No assets left to add to this profile."

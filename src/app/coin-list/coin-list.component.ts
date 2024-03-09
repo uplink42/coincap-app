@@ -1,10 +1,14 @@
-import { Component, EventEmitter, Output, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Output,
+  inject,
+} from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { MatPaginatorModule } from '@angular/material/paginator';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { AppStateService } from '../app-state.service';
-import { AsyncPipe, CurrencyPipe } from '@angular/common';
-import { MatButton } from '@angular/material/button';
+import { AsyncPipe } from '@angular/common';
 import { CoinAssetsComponent } from '../coin-assets/coin-assets.component';
 
 const itemsPerPage = 16;
@@ -15,14 +19,13 @@ const itemsPerPage = 16;
   imports: [MatCardModule, AsyncPipe, CoinAssetsComponent],
   templateUrl: './coin-list.component.html',
   styleUrl: './coin-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoinListComponent {
   @Output() removeAsset = new EventEmitter<string>();
 
   appState = inject(AppStateService);
-
   pageIndex$ = new BehaviorSubject<number>(0);
-
   itemsPerPage = itemsPerPage;
 
   availableAssetsForCurrentPage$ = combineLatest([

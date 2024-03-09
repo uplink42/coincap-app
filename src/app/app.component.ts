@@ -1,4 +1,9 @@
-import { Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CoincapService } from './coincap.service';
 import { AppStateService } from './app-state.service';
@@ -6,7 +11,6 @@ import { CoinListComponent } from './coin-list/coin-list.component';
 import { CoinProfilesComponent } from './coin-profiles/coin-profiles.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { Tile } from './models';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
@@ -22,19 +26,12 @@ import { AsyncPipe } from '@angular/common';
     MatToolbarModule,
     AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
   title = 'coincap-app';
-
   coinCap = inject(CoincapService);
   appState = inject(AppStateService);
-
-  tiles: Tile[] = [
-    { text: 'One', cols: 4, rows: 1, color: 'lightblue' },
-    { text: 'Two', cols: 3, rows: 1, color: 'lightgreen' },
-    { text: 'Three', cols: 1, rows: 1, color: 'lightpink' },
-  ];
-
   profiles$ = this.appState.profiles$;
   activeProfile$ = this.appState.activeProfile$;
 

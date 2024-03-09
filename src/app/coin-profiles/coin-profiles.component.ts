@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { Profile } from '../models';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,18 +20,16 @@ import { AssetsDialogComponent } from '../assets-dialog/assets-dialog.component'
   imports: [MatListModule, MatIconModule, MatDividerModule, MatButtonModule],
   templateUrl: './coin-profiles.component.html',
   styleUrl: './coin-profiles.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CoinProfilesComponent {
   constructor(public dialog: MatDialog) {}
 
-  @Input() profiles: Profile[] = [];
-
-  @Input() activeProfile: number | null = null;
+  @Input({ required: true }) profiles: Profile[] = [];
+  @Input({ required: true }) activeProfile: number | null = null;
 
   @Output() createProfile = new EventEmitter<string>();
-
   @Output() deleteProfile = new EventEmitter<number>();
-
   @Output() setActiveProfile = new EventEmitter<number>();
 
   profileName = '';
