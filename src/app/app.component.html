@@ -1,20 +1,31 @@
-<div class="app-container">
-  <mat-toolbar color="primary">
-    <span>Coin Cap App</span>
-  </mat-toolbar>
+<div class="app">
+  @if (isLoading$ | async; as loading) {
+  <div class="loading">
+    <mat-spinner></mat-spinner>
+  </div>
 
-  @if ({profiles: profiles$ | async, activeProfile: activeProfile$ | async}; as data) {
-  <div class="grid-list">
-    <div class="coin-list-wrapper">
-      <app-coin-list></app-coin-list>
-    </div>
+  } @else {
+  <div class="app-container">
+    @if (rates$ | async; as rates) {
+    @if (activeCurrency$ | async; as currency) {
+    <app-toolbar [rates]="rates" (setActiveCurrency)="setCurrency($event)" [currency]="currency"></app-toolbar>
+    }
+    }
 
-    <div class="profiles-wrapper">
-      <app-coin-profiles [profiles]="data.profiles || []" [activeProfile]="data.activeProfile"
-        (createProfile)="addProfile($event)" (deleteProfile)="deleteProfile($event)"
-        (setActiveProfile)="setActiveProfile($event)">
-      </app-coin-profiles>
+    @if ({profiles: profiles$ | async, activeProfile: activeProfile$ | async}; as data) {
+    <div class="grid-list">
+      <div class="coin-list-wrapper">
+        <app-coin-list></app-coin-list>
+      </div>
+
+      <div class="profiles-wrapper">
+        <app-coin-profiles [profiles]="data.profiles || []" [activeProfile]="data.activeProfile"
+          (createProfile)="addProfile($event)" (deleteProfile)="deleteProfile($event)"
+          (setActiveProfile)="setActiveProfile($event)">
+        </app-coin-profiles>
+      </div>
     </div>
+    }
   </div>
   }
 </div>

@@ -9,9 +9,9 @@ import {
 import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { Asset } from '../models';
+import { Asset } from '../../models';
 import { MatButton } from '@angular/material/button';
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../../services/app-state.service';
 
 @Component({
   selector: 'app-coin-assets',
@@ -31,6 +31,7 @@ export class CoinAssetsComponent {
   appState = inject(AppStateService);
 
   coinPrices$ = this.appState.coinPrices$;
+  activeCurrency$ = this.appState.activeCurrency$;
 
   @Input({ required: true }) pageAssets: Asset[] = [];
   @Input({ required: true }) totalAssets: Asset[] = [];

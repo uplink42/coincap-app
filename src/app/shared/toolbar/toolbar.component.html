@@ -1,0 +1,19 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+        <mat-label>Currency</mat-label>
+        <input type="text" placeholder="Pick one" name="rate" aria-label="Currency" matInput
+            [(ngModel)]="selectedCurrency" [matAutocomplete]="auto" (ngModelChange)="filterRates($event)">
+
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+            (optionSelected)="setActiveCurrency.emit($event.option.value)" (closed)="closeAutocomplete()">
+            @for (rate of filteredRates; track rate.id) {
+            <mat-option [value]="rate.symbol">{{rate.symbol}}</mat-option>
+            }
+        </mat-autocomplete>
+    </mat-form-field>
+</form>
+
+<mat-toolbar color="primary">
+    <span>Coin Cap App</span>
+    <span class="example-spacer"></span>
+</mat-toolbar>

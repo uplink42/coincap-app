@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../services/app-state.service';
 import { AsyncPipe } from '@angular/common';
-import { CoinAssetsComponent } from '../coin-assets/coin-assets.component';
+import { CoinAssetsComponent } from '../shared/coin-assets/coin-assets.component';
 
 const itemsPerPage = 16;
 

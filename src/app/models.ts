@@ -1,3 +1,8 @@
+export interface Response<T> {
+  data: T;
+  timestamp: number;
+}
+
 export interface Asset {
   id: string;
   rank: string;
@@ -11,6 +16,14 @@ export interface Asset {
   changePercent24Hr: string;
 }
 
+export interface Rate {
+  id: string;
+  symbol: string;
+  currencySymbol: string;
+  rateUsd: string;
+  type: 'fiat' | 'crypto';
+}
+
 export interface Profile {
   assets: Asset[];
   id: number;
@@ -18,5 +31,5 @@ export interface Profile {
 }
 
 export interface CoinPrices {
-  [key: string]: string;
+  [key: string]: { priceUsd: string; priceCurrentCurrency: string };
 }

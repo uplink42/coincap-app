@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Asset } from './models';
+import { Asset, Rate, Response } from '../models';
 import { AppStateService } from './app-state.service';
 
 @Injectable({
@@ -11,14 +11,18 @@ export class CoincapService {
   private appState = inject(AppStateService);
 
   getAssets() {
-    return this.http.get<{ data: Asset[] }>('https://api.coincap.io/v2/assets');
+    return this.http.get<Response<Asset[]>>('https://api.coincap.io/v2/assets');
   }
 
-  getPrices() {
+  getRates() {
+    return this.http.get<Response<Rate[]>>('https://api.coincap.io/v2/rates');
+  }
+
+  getLivePrices() {
     const pricesWs = new WebSocket('wss://ws.coincap.io/prices?assets=ALL');
 
     pricesWs.onmessage = (msg) => {
-      this.appState.setCoinPrices(JSON.parse(msg.data));
+      this.appState.setUSDCoinPrices(JSON.parse(msg.data));
     };
   }
 }

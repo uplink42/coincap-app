@@ -6,11 +6,11 @@ import {
   MatDialogRef,
   MatDialogTitle,
 } from '@angular/material/dialog';
-import { AppStateService } from '../app-state.service';
+import { AppStateService } from '../services/app-state.service';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { CoinAssetsComponent } from '../coin-assets/coin-assets.component';
+import { CoinAssetsComponent } from '../shared/coin-assets/coin-assets.component';
 
 const itemsPerPage = 12;
 

@@ -1,6 +1,6 @@
 <div class="new-asset">
   @if (activeProfile) {
-  <button mat-raised-button color="primary" (click)="openAssetsDialog()">Add Asset to {{profileName}}</button>
+  <button mat-raised-button color="primary" (click)="openAssetsDialog()">Add Asset to profile</button>
   }
 </div>
 
@@ -10,11 +10,13 @@
   @for (profile of profiles; track $index) {
   <div class="item">
     <button mat-button class="name" [class.active]="profile.id === activeProfile"
-      (click)="setActiveProfile.emit(profile.id); profileName = profile.name">
+      (click)="setActiveProfile.emit(profile.id)">
       {{profile.name}}</button>
     <div class="action">
+      @if (activeProfile !== profile.id) {
       <mat-icon aria-hidden="false" aria-label="Example icon" fontIcon="delete" color="warn"
         (click)="deleteProfile.emit(profile.id)"></mat-icon>
+      }
     </div>
   </div>
   } @empty {

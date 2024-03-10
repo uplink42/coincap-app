@@ -32,15 +32,12 @@ export class CoinProfilesComponent {
   @Output() deleteProfile = new EventEmitter<number>();
   @Output() setActiveProfile = new EventEmitter<number>();
 
-  profileName = '';
-
   openNewProfileDialog(): void {
     const dialogRef = this.dialog.open(NewProfileDialogComponent);
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.createProfile.emit(result);
-        this.profileName = result;
       }
     });
   }
