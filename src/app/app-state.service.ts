@@ -12,8 +12,8 @@ export class AppStateService {
   private readonly assets = new BehaviorSubject<Asset[]>([]);
   readonly assets$ = this.assets.asObservable();
 
-  private readonly activeProfile = new BehaviorSubject<number | null>(null);
-  readonly activeProfile$ = this.activeProfile.asObservable();
+  private readonly activeProfileId = new BehaviorSubject<number | null>(null);
+  readonly activeProfile$ = this.activeProfileId.asObservable();
 
   private readonly coinPrices = new BehaviorSubject<CoinPrices>({});
   readonly coinPrices$ = this.coinPrices.asObservable();
@@ -80,7 +80,7 @@ export class AppStateService {
   }
 
   setActiveProfile(id: number) {
-    this.activeProfile.next(id);
+    this.activeProfileId.next(id);
   }
 
   deleteProfile(id: number) {
@@ -89,12 +89,12 @@ export class AppStateService {
     ]);
 
     if (this.profiles.value.length === 0) {
-      this.activeProfile.next(null);
+      this.activeProfileId.next(null);
     }
   }
 
   addAssetToActiveProfile = (asset: Asset) => {
-    const activeProfileId = this.activeProfile.value;
+    const activeProfileId = this.activeProfileId.value;
     const activeProfile = [...this.profiles.value].find(
       (profile) => profile.id === activeProfileId
     );
@@ -117,7 +117,7 @@ export class AppStateService {
   };
 
   removeAssetFromCurrentProfile = (asset: Asset) => {
-    const activeProfileId = this.activeProfile.value;
+    const activeProfileId = this.activeProfileId.value;
     const activeProfile = [...this.profiles.value].find(
       (profile) => profile.id === activeProfileId
     );

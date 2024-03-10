@@ -8,7 +8,6 @@ import { AppStateService } from './app-state.service';
 })
 export class CoincapService {
   private http = inject(HttpClient);
-
   private appState = inject(AppStateService);
 
   getAssets() {
