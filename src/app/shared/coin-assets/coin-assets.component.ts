@@ -12,6 +12,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { Asset } from '../../models';
 import { MatButton } from '@angular/material/button';
 import { AppStateService } from '../../services/app-state.service';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-coin-assets',
@@ -22,6 +27,11 @@ import { AppStateService } from '../../services/app-state.service';
     MatPaginatorModule,
     MatButton,
     AsyncPipe,
+    MatInputModule,
+    FormsModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatButtonModule,
   ],
   templateUrl: './coin-assets.component.html',
   styleUrl: './coin-assets.component.scss',
@@ -33,6 +43,8 @@ export class CoinAssetsComponent {
   coinPrices$ = this.appState.coinPrices$;
   activeCurrency$ = this.appState.activeCurrency$;
 
+  searchTerm = '';
+
   @Input({ required: true }) pageAssets: Asset[] = [];
   @Input({ required: true }) totalAssets: Asset[] = [];
   @Input({ required: true }) actionName = '';
@@ -40,4 +52,5 @@ export class CoinAssetsComponent {
   @Input() itemsPerPage = 12;
   @Input() emptyMessage = 'No items';
   @Output() changePage = new EventEmitter<number>();
+  @Output() setSearchTerm = new EventEmitter<string>();
 }

@@ -3,9 +3,9 @@
 
     <mat-dialog-content>
         <app-coin-assets [pageAssets]="(availableAssetsForCurrentPage$ | async) || []" [itemsPerPage]="itemsPerPage"
-            [totalAssets]="(appState.availableAssetsInActiveProfile$| async) || []" actionName="Add"
-            [actionCallback]="appState.addAssetToActiveProfile" emptyMessage="No assets left to add to this profile."
-            (changePage)="pageIndex$.next($event)"></app-coin-assets>
+            [totalAssets]="totalFilteredAssets" actionName="Add" [actionCallback]="appState.addAssetToActiveProfile"
+            emptyMessage="No assets left to add to this profile." (changePage)="pageIndex$.next($event)"
+            (setSearchTerm)="searchTerm$.next($event)"></app-coin-assets>
 
         <mat-dialog-actions align="end">
             <button mat-button (click)="dialogRef.close()">Done</button>

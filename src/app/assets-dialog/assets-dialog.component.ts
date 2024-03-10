@@ -11,6 +11,8 @@ import { BehaviorSubject, combineLatest, map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { CoinAssetsComponent } from '../shared/coin-assets/coin-assets.component';
+import { applySearchAndPaginationToResults } from '../shared/utils';
+import { Asset } from '../models';
 
 const itemsPerPage = 12;
 
@@ -34,26 +36,28 @@ export class AssetsDialogComponent {
   appState = inject(AppStateService);
 
   pageIndex$ = new BehaviorSubject<number>(0);
+  searchTerm$ = new BehaviorSubject<string>('');
   displayedColumns: string[] = ['table'];
+  totalFilteredAssets: Asset[] = [];
   itemsPerPage = itemsPerPage;
 
   availableAssetsForCurrentPage$ = combineLatest([
     this.appState.availableAssetsInActiveProfile$,
     this.pageIndex$,
+    this.searchTerm$,
   ]).pipe(
-    map(([availableAssets, pageIndex]) => {
-      const currentPage = [
-        ...availableAssets.slice(
-          this.itemsPerPage * pageIndex,
-          this.itemsPerPage * (pageIndex + 1)
-        ),
-      ];
+    map(([availableAssets, pageIndex, searchTerm]) => {
+      const assetsList = applySearchAndPaginationToResults(
+        searchTerm,
+        availableAssets,
+        pageIndex,
+        this.itemsPerPage
+      );
 
-      return currentPage;
+      this.totalFilteredAssets = assetsList.total;
+      return assetsList.assets;
     })
   );
 
   constructor(public dialogRef: MatDialogRef<AssetsDialogComponent>) {}
-
-  onSave(): void {}
 }

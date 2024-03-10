@@ -1,29 +1,43 @@
 @if (activeCurrency$ | async; as currency) {
 @if (coinPrices$ | async; as coinPrices) {
+
 <div class="card-list mat-elevation-z8">
-    @for (asset of pageAssets; track $index) {
-    <mat-card class="card">
-        <mat-card-header>
-            <div mat-card-avatar class="header-image">
-                <img src="https://assets.coincap.io/assets/icons/{{asset.symbol.toLowerCase()}}@2x.png" alt="icon" />
-            </div>
-            <mat-card-title>{{asset.name}}</mat-card-title>
-            <mat-card-subtitle>{{asset.symbol}}</mat-card-subtitle>
-            <mat-card-subtitle> {{coinPrices[asset.id].priceCurrentCurrency |
-                currency:currency.symbol}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-actions align="end">
-            <button mat-button (click)="actionCallback(asset)">{{actionName}}</button>
-        </mat-card-actions>
-    </mat-card>
-    } @empty {
-    <span>{{emptyMessage}}</span>
-    }
+  <div class="search-wrapper">
+    <mat-form-field appearance="outline">
+      <mat-label>Search assets</mat-label>
+      <input matInput type="text" [(ngModel)]="searchTerm" (ngModelChange)="setSearchTerm.emit(this.searchTerm)">
+
+      @if (searchTerm) {
+      <button matSuffix mat-icon-button aria-label="Clear" (click)="searchTerm = ''; setSearchTerm.emit('')">
+        <mat-icon>close</mat-icon>
+      </button>
+      }
+    </mat-form-field>
+  </div>
+
+  @for (asset of pageAssets; track $index) {
+  <mat-card class="card">
+    <mat-card-header>
+      <div mat-card-avatar class="header-image">
+        <img src="https://assets.coincap.io/assets/icons/{{asset.symbol.toLowerCase()}}@2x.png" alt="icon" />
+      </div>
+      <mat-card-title>{{asset.name}}</mat-card-title>
+      <mat-card-subtitle>{{asset.symbol}}</mat-card-subtitle>
+      <mat-card-subtitle> {{coinPrices[asset.id].priceCurrentCurrency |
+        currency:currency.symbol}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions align="end">
+      <button mat-button (click)="actionCallback(asset)">{{actionName}}</button>
+    </mat-card-actions>
+  </mat-card>
+  } @empty {
+  <div style="margin-left: 15px;">{{emptyMessage}}</div>
+  }
 </div>
 
 <div class="paginator-wrapper">
-    <mat-paginator #paginator [pageSizeOptions]="[itemsPerPage]" aria-label="Select page of assets"
-        [length]="totalAssets.length" (page)="changePage.emit($event.pageIndex)"></mat-paginator>
+  <mat-paginator #paginator [pageSizeOptions]="[itemsPerPage]" aria-label="Select page of assets"
+    [length]="totalAssets.length" (page)="changePage.emit($event.pageIndex)"></mat-paginator>
 </div>
 }
 }

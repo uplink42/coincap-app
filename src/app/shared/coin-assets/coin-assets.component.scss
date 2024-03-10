@@ -13,9 +13,19 @@ mat-card {
     }
 }
 
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 15px;
+    margin-top: 10px;
+}
+
 .paginator-wrapper {
-    text-align: right;
-    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
 }
 
 img {

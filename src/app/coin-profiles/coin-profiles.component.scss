@@ -1,5 +1,6 @@
 .profile-list {
     margin-top: 50px;
+    padding: 10px;
 }
 
 .new-profile {
@@ -11,6 +12,7 @@
 
     .name {
         flex: 1;
+        padding-left: 30px;
 
         &.active {
             font-weight: bold;
